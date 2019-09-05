@@ -2,28 +2,23 @@
 
 [![Build Status](https://travis-ci.com/cisagov/freeipa-client-tf-module.svg?branch=develop)](https://travis-ci.com/cisagov/freeipa-client-tf-module)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and a [Travis
-CI](https://travis-ci.com) configuration appropriate for the major
-languages that we use.
-
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+A Terraform module for deploying a FreeIPA client into a subnet.
 
 ## Usage ##
 
 ```hcl
-module "example" {
+module "ipa" {
   source = "github.com/cisagov/freeipa-client-tf-module"
 
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
-
+  domain               = "example.com"
+  hostname             = "ipa.example.com"
+  realm                = "EXAMPLE.COM"
+  subnet_id            = aws_subnet.the_subnet.id
+  trusted_cidr_blocks = [
+    "10.99.49.0/24",
+    "10.99.52.0/24"
+  ]
+  associate_public_ip_address = true
   tags = {
     Key1 = "Value1"
     Key2 = "Value2"
