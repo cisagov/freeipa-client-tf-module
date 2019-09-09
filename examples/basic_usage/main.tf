@@ -128,13 +128,13 @@ module "ipa_client1" {
   associate_public_ip_address = true
   # Normally we would use a separate security group for clients, but
   # for brevity we just reuse the server security group here.
-  client_security_group_id    = module.ipa_master.server_security_group_id
-  hostname                    = "client1.cal23.cyber.dhs.gov"
-  private_reverse_zone_id     = aws_route53_zone.client_private_reverse_zone.zone_id
-  private_zone_id             = aws_route53_zone.private_zone.zone_id
-  public_zone_id              = data.aws_route53_zone.public_zone.zone_id
-  realm                       = "CAL23.CYBER.DHS.GOV"
-  subnet_id                   = aws_subnet.client_subnet.id
+  client_security_group_id = module.ipa_master.server_security_group_id
+  hostname                 = "client1.cal23.cyber.dhs.gov"
+  private_reverse_zone_id  = aws_route53_zone.client_private_reverse_zone.zone_id
+  private_zone_id          = aws_route53_zone.private_zone.zone_id
+  public_zone_id           = data.aws_route53_zone.public_zone.zone_id
+  realm                    = "CAL23.CYBER.DHS.GOV"
+  subnet_id                = aws_subnet.client_subnet.id
   tags = {
     Testing = true
   }

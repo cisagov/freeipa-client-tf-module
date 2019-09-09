@@ -9,7 +9,7 @@ A Terraform module for deploying a FreeIPA client into a subnet.
 ```hcl
 module "ipa" {
   source = "github.com/cisagov/freeipa-client-tf-module"
-  
+
   providers = {
     aws     = "aws"
     aws.dns = "aws"
