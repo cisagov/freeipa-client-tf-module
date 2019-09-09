@@ -122,7 +122,6 @@ module "ipa_client1" {
   admin_pw                    = "thepassword"
   associate_public_ip_address = true
   client_security_group_id    = module.ipa_master.server_security_group_id
-  domain                      = "cal23.cyber.dhs.gov"
   hostname                    = "client1.cal23.cyber.dhs.gov"
   private_reverse_zone_id     = aws_route53_zone.client_private_reverse_zone.zone_id
   private_zone_id             = aws_route53_zone.private_zone.zone_id

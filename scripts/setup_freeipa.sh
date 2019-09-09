@@ -2,7 +2,6 @@
 
 # Input variables are:
 # admin_pw - the password for the IPA server's Kerberos admin role
-# domain - the domain for the IPA server (e.g. example.com)
 # hostname - the hostname of this IPA client (e.g. client.example.com)
 # realm - the realm for the IPA server (e.g. EXAMPLE.COM)
 
@@ -40,8 +39,7 @@ done
 # ignore the "undefined variable" warnings from shellcheck.
 #
 # shellcheck disable=SC2154
-ipa-client-install --domain="${domain}" \
-                   --realm="${realm}" \
+ipa-client-install --realm="${realm}" \
                    --principal=admin \
                    --password="${admin_pw}" \
                    --mkhomedir \

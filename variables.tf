@@ -12,10 +12,6 @@ variable "client_security_group_id" {
   description = "The ID for the IPA client security group (e.g. sg-0123456789abcdef0)"
 }
 
-variable "domain" {
-  description = "The domain for the IPA client (e.g. example.com)"
-}
-
 variable "hostname" {
   description = "The hostname of this IPA client (e.g. client.example.com)"
 }

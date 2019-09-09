@@ -46,7 +46,6 @@ module "ipa" {
 | associate_public_ip_address | Whether or not to associate a public IP address with the IPA client | bool | `false` | no |
 | aws_instance_type | The AWS instance type to deploy (e.g. t3.medium). | string | `t3.medium` | no |
 | client_security_group_id | The ID for the IPA client security group (e.g. sg-0123456789abcdef0) | string | | yes |
-| domain | The domain for the IPA client (e.g. example.com) | string | | yes |
 | hostname | The hostname of this IPA client (e.g. `client.example.com`) | string | | yes |
 | private_reverse_zone_id | The zone ID corresponding to the private Route53 reverse zone where the PTR records related to this IPA client should be created (e.g. `ZKX36JXQ8W82L`) | string | | yes |
 | private_zone_id | The zone ID corresponding to the private Route53 zone where the Kerberos-related DNS records should be created (e.g. `ZKX36JXQ8W82L`) | string | | yes |
