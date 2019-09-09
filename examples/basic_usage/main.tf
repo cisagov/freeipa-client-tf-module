@@ -111,6 +111,11 @@ module "ipa_master" {
   ttl = 60
 }
 
+# The client module really expects that the server is already up and
+# running when the client boots.  Therefore the attempt to run
+# ipa-client-install may fail.  If that happens, simply log into the
+# client and run sudo /var/lib/cloud/instance/scripts/part-001 to
+# force the relevant cloud-init script to run again.
 module "ipa_client1" {
   source = "../../"
 
@@ -121,6 +126,8 @@ module "ipa_client1" {
 
   admin_pw                    = "thepassword"
   associate_public_ip_address = true
+  # Normally we would use a separate security group for clients, but
+  # for brevity we just reuse the server security group here.
   client_security_group_id    = module.ipa_master.server_security_group_id
   hostname                    = "client1.cal23.cyber.dhs.gov"
   private_reverse_zone_id     = aws_route53_zone.client_private_reverse_zone.zone_id
