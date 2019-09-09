@@ -64,11 +64,6 @@ variable "public_zone_id" {
   default     = ""
 }
 
-variable "server_hostname" {
-  description = "The hostname of the IPA server (e.g. ipa.example.com).  Only necessary if you want the client to delay installation until the server becomes available."
-  default     = ""
-}
-
 variable "tags" {
   type        = map(string)
   description = "Tags to apply to all AWS resources created"
