@@ -18,7 +18,6 @@ module "ipa" {
   admin_pw                    = "thepassword"
   associate_public_ip_address = true
   client_security_group_id    = aws.aws_security_group.client_sg.id
-  domain                      = "example.com"
   hostname                    = "client1.example.com"
   private_reverse_zone_id     = aws_route53_zone.client_private_reverse_zone.zone_id
   private_zone_id             = aws_route53_zone.private_zone.zone_id
