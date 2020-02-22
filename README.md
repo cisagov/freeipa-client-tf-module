@@ -57,7 +57,7 @@ module "ipa" {
 
 | Name | Description |
 |------|-------------|
-| id | The EC2 instance ID corresponding to the IPA client |
+| client | The IPA client EC2 instance. |
 
 ## Contributing ##
 
