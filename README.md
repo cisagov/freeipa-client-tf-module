@@ -40,9 +40,9 @@ module "ipa" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-------:|:--------:|
-| ami_owner_account_id | The ID of the AWS account that owns the FreeIPA client AMI | string | `344440683180` | no |
-| admin_pw | The admin password for the Kerberos admin role | string | | yes |
-| associate_public_ip_address | Whether or not to associate a public IP address with the IPA client | bool | `false` | no |
+| ami_owner_account_id | The ID of the AWS account that owns the FreeIPA client AMI, or "self" if the AMI is owned by the same account as the provisioner. | string | `self` | no |
+| admin_pw | The admin password for the Kerberos admin role. | string | | yes |
+| associate_public_ip_address | Whether or not to associate a public IP address with the IPA client. | bool | `false` | no |
 | aws_instance_type | The AWS instance type to deploy (e.g. t3.medium). | string | `t3.medium` | no |
 | client_security_group_id | The ID for the IPA client security group (e.g. sg-0123456789abcdef0) | string | | yes |
 | hostname | The hostname of this IPA client (e.g. `client.example.com`) | string | | yes |

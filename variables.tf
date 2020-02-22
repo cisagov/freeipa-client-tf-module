@@ -40,8 +40,8 @@ variable "subnet_id" {
 # ------------------------------------------------------------------------------
 
 variable "ami_owner_account_id" {
-  description = "The ID of the AWS account that owns the FreeIPA client AMI"
-  default     = "344440683180" # CISA NCATS CyHy production (Raytheon) account
+  description = "The ID of the AWS account that owns the FreeIPA client AMI, or \"self\" if the AMI is owned by the same account as the provisioner."
+  default     = "self"
 }
 
 variable "associate_public_ip_address" {
