@@ -1,5 +1,18 @@
 provider "aws" {
-  region = "us-west-1"
+  profile = "cool-sharedservices-provisionaccount"
+  region  = "us-east-1"
+}
+
+provider "aws" {
+  alias   = "public_dns"
+  profile = "cool-olddns-route53fullaccess"
+  region  = "us-east-1"
+}
+
+provider "aws" {
+  alias   = "cert_read_role"
+  profile = "cool-dns-provisioncertificatereadroles"
+  region  = "us-east-1"
 }
 
 #-------------------------------------------------------------------------------
@@ -82,6 +95,23 @@ data "aws_route53_zone" "public_zone" {
 }
 
 #-------------------------------------------------------------------------------
+# Create a role that allows the master to read its certs from S3.
+#-------------------------------------------------------------------------------
+module "certreadrole" {
+  source = "github.com/cisagov/cert-read-role-tf-module"
+
+  providers = {
+    aws = "aws.cert_read_role"
+  }
+
+  account_ids = [
+    "236526679726" # The COOL Users account
+  ]
+  cert_bucket_name = "cisa-cool-certificates"
+  hostname         = "ipa.cal23.cyber.dhs.gov"
+}
+
+#-------------------------------------------------------------------------------
 # Configure the master and replica modules.
 #-------------------------------------------------------------------------------
 module "ipa_master" {
@@ -89,11 +119,15 @@ module "ipa_master" {
 
   providers = {
     aws     = "aws"
-    aws.dns = "aws"
+    aws.dns = "aws.public_dns"
   }
 
   admin_pw                    = "thepassword"
+  ami_owner_account_id        = "207871073513" # The COOL Images account
   associate_public_ip_address = true
+  cert_bucket_name            = "cisa-cool-certificates"
+  cert_pw                     = "lemmy"
+  cert_read_role_arn          = module.certreadrole.arn
   directory_service_pw        = "thepassword"
   domain                      = "cal23.cyber.dhs.gov"
   hostname                    = "ipa.cal23.cyber.dhs.gov"
@@ -106,7 +140,8 @@ module "ipa_master" {
     Testing = true
   }
   trusted_cidr_blocks = [
-    "108.31.3.53/32"
+    "108.31.3.53/32",
+    "64.69.57.0/24",
   ]
   ttl = 60
 }
@@ -121,10 +156,11 @@ module "ipa_client1" {
 
   providers = {
     aws     = "aws"
-    aws.dns = "aws"
+    aws.dns = "aws.public_dns"
   }
 
   admin_pw                    = "thepassword"
+  ami_owner_account_id        = "207871073513" # The COOL Images account
   associate_public_ip_address = true
   # Normally we would use a separate security group for clients, but
   # for brevity we just reuse the server security group here.
