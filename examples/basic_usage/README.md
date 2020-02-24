@@ -12,6 +12,6 @@ Note that this example may create resources which cost money. Run
 
 | Name | Description |
 |------|-------------|
-| ipa_server_security_group_id | The ID corresponding to the IPA server security group |
-| master_id | The EC2 instance ID corresponding to the IPA master |
-| replica_id | The EC2 instance ID corresponding to the IPA replica |
+| ipa_server_security_group | The IPA server security group. |
+| master | The IPA master EC2 instance. |
+| replica | The IPA replica EC2 instance. |

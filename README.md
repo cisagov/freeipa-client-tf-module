@@ -40,24 +40,24 @@ module "ipa" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-------:|:--------:|
-| ami_owner_account_id | The ID of the AWS account that owns the FreeIPA client AMI | string | `344440683180` | no |
-| admin_pw | The admin password for the Kerberos admin role | string | | yes |
-| associate_public_ip_address | Whether or not to associate a public IP address with the IPA client | bool | `false` | no |
+| ami_owner_account_id | The ID of the AWS account that owns the FreeIPA client AMI, or "self" if the AMI is owned by the same account as the provisioner. | string | `self` | no |
+| admin_pw | The admin password for the Kerberos admin role. | string | | yes |
+| associate_public_ip_address | Whether or not to associate a public IP address with the IPA client. | bool | `false` | no |
 | aws_instance_type | The AWS instance type to deploy (e.g. t3.medium). | string | `t3.medium` | no |
-| client_security_group_id | The ID for the IPA client security group (e.g. sg-0123456789abcdef0) | string | | yes |
-| hostname | The hostname of this IPA client (e.g. `client.example.com`) | string | | yes |
-| private_reverse_zone_id | The zone ID corresponding to the private Route53 reverse zone where the PTR records related to this IPA client should be created (e.g. `ZKX36JXQ8W82L`) | string | | yes |
-| private_zone_id | The zone ID corresponding to the private Route53 zone where the Kerberos-related DNS records should be created (e.g. `ZKX36JXQ8W82L`) | string | | yes |
+| client_security_group_id | The ID for the IPA client security group (e.g. sg-0123456789abcdef0). | string | | yes |
+| hostname | The hostname of this IPA client (e.g. `client.example.com`). | string | | yes |
+| private_reverse_zone_id | The zone ID corresponding to the private Route53 reverse zone where the PTR records related to this IPA client should be created (e.g. `ZKX36JXQ8W82L`). | string | | yes |
+| private_zone_id | The zone ID corresponding to the private Route53 zone where the Kerberos-related DNS records should be created (e.g. `ZKX36JXQ8W82L`). | string | | yes |
 | public_zone_id | The zone ID corresponding to the public Route53 zone where the Kerberos-related DNS records should be created (e.g. `ZKX36JXQ8W82L`).  Only required if a public IP address is associated with the IPA client (i.e. if associate_public_ip_address is true). | string | Empty string | no |
-| subnet_id | The ID of the AWS subnet into which to deploy this IPA client (e.g. `subnet-0123456789abcdef0`) | string | | yes |
-| tags | Tags to apply to all AWS resources created | map(string) | `{}` | no |
+| subnet_id | The ID of the AWS subnet into which to deploy this IPA client (e.g. `subnet-0123456789abcdef0`). | string | | yes |
+| tags | Tags to apply to all AWS resources created. | map(string) | `{}` | no |
 | ttl | The TTL value to use for Route53 DNS records (e.g. 86400).  A smaller value may be useful when the DNS records are changing often, for example when testing. | string | `86400` | no |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| id | The EC2 instance ID corresponding to the IPA client |
+| client | The IPA client EC2 instance. |
 
 ## Contributing ##
 
